@@ -10,8 +10,7 @@ from app.models import const
 from app.models.schema import VideoParams, VideoConcatMode
 from app.services import llm, material, voice, video, subtitle
 from app.services import state as sm
-from app.utils import utils
-
+from app.utils import utils,minio_utils
 
 def start(task_id, params: VideoParams):
     """
@@ -193,6 +192,12 @@ def start(task_id, params: VideoParams):
 
         final_video_paths.append(final_video_path)
         combined_video_paths.append(combined_video_path)
+
+
+        video_url = minio_utils.upload_local_file('7jjsgq26-simon', final_video_path, task_id + f"/final-{index}.mp4")
+        final_video_paths.remove(final_video_path)
+        final_video_paths.append(video_url)
+        os.remove(final_video_path)
 
     logger.success(f"task {task_id} finished, generated {len(final_video_paths)} videos.")
 

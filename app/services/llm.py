@@ -325,7 +325,7 @@ Please note that you must use English for generating video search terms; Chinese
 
 
 if __name__ == "__main__":
-    video_subject = "生命的意义是什么"
+    video_subject = "西蒙学习法"
     script = generate_script(video_subject=video_subject, language="zh-CN", paragraph_number=1)
     print("######################")
     print(script)

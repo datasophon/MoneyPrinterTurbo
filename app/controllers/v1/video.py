@@ -104,7 +104,8 @@ def get_task(request: Request, task_id: str = Path(..., description="Task ID"),
             combined_videos = task["combined_videos"]
             urls = []
             for v in combined_videos:
-                urls.append(file_to_uri(v))
+                # urls.append(file_to_uri(v))
+                urls.append(v)
             task["combined_videos"] = urls
         return utils.get_response(200, task)
 
